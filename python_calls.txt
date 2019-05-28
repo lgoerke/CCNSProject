@@ -1,0 +1,48 @@
+######################
+## Reconstructions  ##
+######################
+python plot_procedure_reconstruct.py e100_b16_lam0.04_lr0.0001 
+python plot_procedure_reconstruct.py e100_b32_lam0.02_lr0.0001
+python plot_procedure_reconstruct.py e200_b16_lam0.02_lr0.001
+
+######################
+## Plot loss        ##
+######################
+python plot_procedure_loss.py pos_e10_b32_lam1_lr0.001
+
+######################
+## Compare losses   ##
+######################
+python plot_procedure_compare.py e100_b16_lam0.04_lr0.0001 e100_b32_lam0.04_lr0.0001 e100_b64_lam0.04_lr0.0001 --title Batchsize
+python plot_procedure_compare.py e100_b32_lam0.04_lr0.001 e100_b32_lam0.04_lr0.0001 e100_b32_lam0.04_lr1e-05 --title "Learning Rate"
+python plot_procedure_compare.py e100_b32_lam0.02_lr0.0001 e100_b32_lam0.04_lr0.0001 e100_b32_lam0.08_lr0.0001 --title "Loss Ratio"
+python plot_procedure_compare.py e200_b16_lam0.01_lr0.001 e200_b16_lam0.02_lr0.001 e200_b16_lam0.04_lr0.001 e200_b16_lam0.08_lr0.001 --title "Loss Ratio"
+
+######################
+## Compare with MSE ##
+######################
+# batchsize
+python metric.py e100_b16_lam0.04_lr0.0001 e100_b32_lam0.04_lr0.0001 e100_b64_lam0.04_lr0.0001
+# learning rate
+python metric.py e100_b32_lam0.04_lr0.001 e100_b32_lam0.04_lr0.0001 e100_b32_lam0.04_lr1e-05
+# loss ratio
+python metric.py e100_b32_lam0.02_lr0.0001 e100_b32_lam0.04_lr0.0001 e100_b32_lam0.08_lr0.0001
+
+# loss ratio 200 epochs
+python metric.py e200_b16_lam0.01_lr0.001 e200_b16_lam0.02_lr0.001 e200_b16_lam0.04_lr0.001 e200_b16_lam0.08_lr0.001
+
+# all
+python metric.py e200_b16_lam0.02_lr0.001 e200_b16_lam0.04_lr0.001 e200_b16_lam0.08_lr0.001 e100_b32_lam0.02_lr0.0001 e100_b32_lam0.04_lr0.0001 e100_b32_lam0.08_lr0.0001 e100_b32_lam0.04_lr0.001 e100_b32_lam0.04_lr1e-05 e100_b16_lam0.04_lr0.0001 e100_b64_lam0.04_lr0.0001
+
+######################
+## Sampling         ##
+######################
+python plot_procedure_sampling.py e200_b16_lam0.01_lr0.001 --no_samples 10
+python plot_procedure_sampling.py e200_b16_lam0.08_lr0.001 --no_samples 10
+
+python plot_procedure_sampling_half.py e200_b16_lam0.01_lr0.001 --no_samples 10
+
+python plot_procedure_systematic_sampling.py e200_b16_lam0.01_lr0.001
+
+## What do m,s look like?
+python plot_procedure_ms.py e200_b16_lam0.01_lr0.001
